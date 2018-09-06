@@ -1,0 +1,13 @@
+version: "3"
+services:
+    hellopython:
+        image: "hellopython:dev"
+        build:
+            context: .
+            dockerfile: Dockerfile
+        hostname: hellopython
+        stdin_open: true
+        tty: true
+        working_dir: '/hellopython-dev'
+        volumes:
+            - ".:/hellopython-dev"
