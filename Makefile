@@ -5,8 +5,8 @@ clean:
 
 virtualenv:
 	virtualenv --prompt '|> hellopython <| ' env
-	env/bin/pip install -r requirements-dev.txt
-	env/bin/python setup.py develop
+	venv/bin/pip install -r requirements-dev.txt
+	venv/bin/python setup.py develop
 	@echo
 	@echo "VirtualENV Setup Complete. Now run: source env/bin/activate"
 	@echo
