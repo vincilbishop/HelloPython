@@ -67,4 +67,18 @@ class Base(Controller):
         if self.app.pargs.foo is not None:
             data['foo'] = self.app.pargs.foo
 
-        self.app.render(data, 'command1.jinja2')
+        self.app.render(data, 'command2.jinja2')
+
+    def command3(self):
+        """Example second sub-command."""
+
+        data = {
+            'foo': 'bar',
+            'foo2': 'bar2',
+        }
+
+        ### do something with arguments
+        if self.app.pargs.foo is not None:
+            data['foo'] = self.app.pargs.foo
+
+        self.app.render(data, 'command3.jinja2')
