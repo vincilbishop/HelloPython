@@ -56,11 +56,24 @@ class Base(Controller):
 
         self.app.render(data, 'command1.jinja2')
 
+    @ex(
+        help='example sub command2',
+
+        # sub-command level arguments. ex: 'hellopython command1 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
     def command2(self):
+
         """Example sub-command."""
 
         data = {
-            'foo': 'bar',
+            'foo': 'bar2',
         }
 
         ### do something with arguments
@@ -69,12 +82,24 @@ class Base(Controller):
 
         self.app.render(data, 'command2.jinja2')
 
+    @ex(
+        help='example sub command3',
+
+        # sub-command level arguments. ex: 'hellopython command1 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
     def command3(self):
-        """Example second sub-command."""
+
+        """Example third sub-command."""
 
         data = {
-            'foo': 'bar',
-            'foo2': 'bar2',
+            'foo': 'bar3',
         }
 
         ### do something with arguments
