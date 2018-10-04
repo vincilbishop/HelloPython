@@ -1,6 +1,8 @@
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
+import time
+from yaspin import yaspin
 
 VERSION_BANNER = """
 Hello Python! %s
@@ -94,9 +96,12 @@ class Base(Controller):
               'dest': 'foo'}),
         ],
     )
+    @yaspin(text="Loading...")
     def command3(self):
 
         """Example third sub-command."""
+
+        time.sleep(3)  # time consuming code
 
         data = {
             'foo': 'bar3',
