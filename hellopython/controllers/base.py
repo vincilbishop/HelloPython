@@ -3,6 +3,7 @@ from cement.utils.version import get_version_banner
 from ..core.version import get_version
 import time
 from yaspin import yaspin
+from cement import shell
 
 VERSION_BANNER = """
 Hello Python! %s
@@ -61,7 +62,7 @@ class Base(Controller):
     @ex(
         help='example sub command2',
 
-        # sub-command level arguments. ex: 'hellopython command1 --foo bar'
+        # sub-command level arguments. ex: 'hellopython command2 --foo bar'
         arguments=[
             ### add a sample foo option under subcommand namespace
             (['-f', '--foo'],
@@ -87,7 +88,7 @@ class Base(Controller):
     @ex(
         help='example sub command3',
 
-        # sub-command level arguments. ex: 'hellopython command1 --foo bar'
+        # sub-command level arguments. ex: 'hellopython command3 --foo bar'
         arguments=[
             ### add a sample foo option under subcommand namespace
             (['-f', '--foo'],
@@ -112,3 +113,39 @@ class Base(Controller):
             data['foo'] = self.app.pargs.foo
 
         self.app.render(data, 'command3.jinja2')
+
+    @ex(
+        help='example sub command4',
+
+        # sub-command level arguments. ex: 'hellopython command4 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
+    @yaspin(text="Loading...")
+    def command4(self):
+
+        """Example third sub-command."""
+
+        time.sleep(1)  # time consuming code
+
+        ### execute command with output to console
+        out, err, code = shell.cmd('git status')
+
+        data = {
+            'foo': 'bar3',
+            'out': out
+        }
+
+        ### do something with arguments
+        if self.app.pargs.foo is not None:
+            data['foo'] = self.app.pargs.foo
+
+
+
+        self.app.render(data, 'command4.jinja2')
+
