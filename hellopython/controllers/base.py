@@ -1,9 +1,16 @@
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
+from cement import shell
+
 from ..core.version import get_version
 import time
+
 from yaspin import yaspin
-from cement import shell
+
+from colorama import init, Fore, Back, Style
+import emoji
+
+init()
 
 VERSION_BANNER = """
 Hello Python! %s
@@ -128,8 +135,7 @@ class Base(Controller):
     )
     @yaspin(text="Loading...")
     def command4(self):
-
-        """Example third sub-command."""
+        """Example fourth sub-command."""
 
         time.sleep(1)  # time consuming code
 
@@ -148,4 +154,68 @@ class Base(Controller):
 
 
         self.app.render(data, 'command4.jinja2')
+
+    @ex(
+        help='example sub command5',
+
+        # sub-command level arguments. ex: 'hellopython command5 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
+    def command5(self):
+
+        """Example fifth sub-command."""
+
+        ### execute command with output to console
+        out, err, code = shell.cmd('git status')
+
+        data = {
+            'foo': 'bar3',
+            'out': out
+        }
+
+        ### do something with arguments
+        if self.app.pargs.foo is not None:
+            data['foo'] = self.app.pargs.foo
+
+        print(Fore.RED + 'some red text')
+        print(Back.WHITE + 'and with a white background' + Style.RESET_ALL)
+        print(Style.RESET_ALL + 'back to normal now')
+
+
+    @ex(
+        help='example sub command6',
+
+        # sub-command level arguments. ex: 'hellopython command6 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
+    def command6(self):
+
+        """Example sixth sub-command."""
+
+        ### execute command with output to console
+        out, err, code = shell.cmd('git status')
+
+        data = {
+            'foo': 'bar3',
+            'out': out
+        }
+
+        ### do something with arguments
+        if self.app.pargs.foo is not None:
+            data['foo'] = self.app.pargs.foo
+
+        print(emoji.emojize('Python is :thumbs_up:'))
+        print(emoji.emojize('Time for a :beer:', use_aliases=True))
 
