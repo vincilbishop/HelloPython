@@ -6,6 +6,7 @@ from ..core.version import get_version
 import time
 
 from yaspin import yaspin
+
 from colorama import init, Fore, Back, Style
 import emoji
 
@@ -134,7 +135,6 @@ class Base(Controller):
     )
     @yaspin(text="Loading...")
     def command4(self):
-
         """Example fourth sub-command."""
 
         time.sleep(1)  # time consuming code
@@ -154,7 +154,6 @@ class Base(Controller):
 
 
         self.app.render(data, 'command4.jinja2')
-
 
     @ex(
         help='example sub command5',
@@ -219,3 +218,4 @@ class Base(Controller):
 
         print(emoji.emojize('Python is :thumbs_up:'))
         print(emoji.emojize('Time for a :beer:', use_aliases=True))
+
