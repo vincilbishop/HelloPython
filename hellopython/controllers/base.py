@@ -1,6 +1,7 @@
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from cement import shell
+from cement import App, init_defaults
 
 from ..core.version import get_version
 import time
@@ -11,6 +12,14 @@ from colorama import init, Fore, Back, Style
 import emoji
 
 init()
+
+# See: https://docs.builtoncement.com/extensions/daemon
+DEFAULTS = init_defaults('hellopython', 'daemon')
+DEFAULTS['daemon']['user'] = 'myuser'
+DEFAULTS['daemon']['group'] = 'staff'
+DEFAULTS['daemon']['dir'] = '/var/lib/hellopython/'
+DEFAULTS['daemon']['pid_file'] = '/var/run/hellopython/myapp.pid'
+DEFAULTS['daemon']['umask'] = 0
 
 VERSION_BANNER = """
 Hello Python! %s
@@ -35,6 +44,8 @@ class Base(Controller):
              {'action': 'version',
               'version': VERSION_BANNER}),
         ]
+
+        config_defaults = DEFAULTS
 
     def _default(self):
         """Default action if no sub-command is passed."""
