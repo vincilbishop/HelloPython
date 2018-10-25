@@ -12,7 +12,6 @@ from colorama import init, Fore, Back, Style
 import emoji
 
 init()
-
 # See: https://docs.builtoncement.com/extensions/daemon
 DEFAULTS = init_defaults('hellopython', 'daemon')
 DEFAULTS['daemon']['user'] = 'myuser'
@@ -20,6 +19,7 @@ DEFAULTS['daemon']['group'] = 'staff'
 DEFAULTS['daemon']['dir'] = '/var/lib/hellopython/'
 DEFAULTS['daemon']['pid_file'] = '/var/run/hellopython/myapp.pid'
 DEFAULTS['daemon']['umask'] = 0
+
 
 VERSION_BANNER = """
 Hello Python! %s
