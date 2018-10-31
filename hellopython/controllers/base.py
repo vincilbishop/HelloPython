@@ -11,6 +11,8 @@ from yaspin import yaspin
 from colorama import init, Fore, Back, Style
 import emoji
 
+from pymongo import MongoClient
+
 init()
 # See: https://docs.builtoncement.com/extensions/daemon
 DEFAULTS = init_defaults('hellopython', 'daemon')
@@ -229,4 +231,33 @@ class Base(Controller):
 
         print(emoji.emojize('Python is :thumbs_up:'))
         print(emoji.emojize('Time for a :beer:', use_aliases=True))
+
+    @ex(
+        help='example mongodb subcommand',
+
+        # sub-command level arguments. ex: 'hellopython command6 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
+    def command7(self):
+
+        """Example hello mongo sub-command."""
+        client = MongoClient('localhost', 27017)
+
+        db = client['pymongo_test']
+        posts = db.posts
+        post_data = {
+            'title': 'Python and MongoDB',
+            'content': 'PyMongo is fun, you guys',
+            'author': 'Scott'
+        }
+        result = posts.insert_one(post_data)
+        print('One post: {0}'.format(result.inserted_id))
+
+        print(emoji.emojize('Mongo DB :thumbs_up:'))
 
