@@ -6,3 +6,4 @@ yaspin
 colorama
 emoji
 pymongo
+python-wifi
