@@ -12,6 +12,7 @@ from colorama import init, Fore, Back, Style
 import emoji
 
 from pymongo import MongoClient
+from pythonwifi.iwlibs import Wireless
 
 init()
 # See: https://docs.builtoncement.com/extensions/daemon
@@ -260,4 +261,24 @@ class Base(Controller):
         print('One post: {0}'.format(result.inserted_id))
 
         print(emoji.emojize('Mongo DB :thumbs_up:'))
+
+    @ex(
+        help='example wifi subcommand',
+
+        # sub-command level arguments. ex: 'hellopython command6 --foo bar'
+        arguments=[
+            ### add a sample foo option under subcommand namespace
+            (['-f', '--foo'],
+             {'help': 'notorious foo option',
+              'action': 'store',
+              'dest': 'foo'}),
+        ],
+    )
+    def command8(self):
+
+        """Example hello wifi sub-command."""
+        wifi = Wireless('eth0')
+        print('SSID: {0}'.format(wifi.getEssid()))
+
+        print(emoji.emojize('Python WiFi :thumbs_up:'))
 
