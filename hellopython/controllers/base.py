@@ -281,3 +281,4 @@ class Base(Controller):
         print('SSID: {0}'.format(wifi.getEssid()))
 
         print(emoji.emojize('Python WiFi :thumbs_up:'))
+
