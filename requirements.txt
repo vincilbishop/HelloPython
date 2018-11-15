@@ -7,4 +7,7 @@ colorama
 emoji
 pymongo
 python-wifi
+<<<<<<< HEAD
 Pillow
+=======
+>>>>>>> c0ebb5f73f36d05c0f1d2e6758e54bed53b94ebd

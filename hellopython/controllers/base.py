@@ -283,6 +283,7 @@ class Base(Controller):
 
         print(emoji.emojize('Python WiFi :thumbs_up:'))
 
+<<<<<<< HEAD
 ASCII_CHARS = [ '#', '?', '%', '.', 'S', '+', '.', '*', ':', ',', '@']
 
 def scale_image(image, new_width=100):
