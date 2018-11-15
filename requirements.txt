@@ -7,3 +7,4 @@ colorama
 emoji
 pymongo
 python-wifi
+Pillow
